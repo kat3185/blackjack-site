@@ -1,0 +1,15 @@
+<table>
+  <tr>
+    <th><%= session[:player_name] %>'s Total Score</th>
+    <th>Dealer's Visible Score</th>
+  </tr>
+  <tr>
+    <td><%= session[:game].player_hand.score %></td>
+    <td><% if session[:player_stands] == false %>
+          <%= session[:game].dealer_hand.cards.last.value %>
+        <% else %>
+        <%= session[:game].dealer_hand.score %>
+        <% end %>
+      </td>
+  </tr>
+</table>
