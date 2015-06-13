@@ -57,7 +57,12 @@ describe Game do
       game.dealer_hand.hit!(Card.new("A", "♥"))
       expect(game.dealer_hand.score).not_to eq(17)
     end
-    
+
+  end
+
+  describe '#visible_dealer_cards' do
+    it 'does not display the first card the dealer was dealt'
+
   end
 
 end

@@ -1,24 +1,35 @@
-<h1><%=session[:player_name]%> vs Dealer</h1>
-
-<% if session[:player_stands] == true %>
-  <%= session[:game].determine_winner %>
-  <%= session[:game].dealer_hand.print_hand %>
-<% else %>
-  <p>Dealer was dealt: [ ]</p>
-  Dealer was dealt: <%= session[:game].dealer_hand.cards.last.id %>
-<% end %>
-<p></p>
-<%= session[:game].player_hand.print_hand %>
-
-<%= erb :scoreboard %>
+<span><h1><%=session[:player_name]%> vs Dealer</h1></span>
+<div class="row">
+  <% if session[:player_stands] == true  || session[:game].player_hand.bust? %>
+    <%= session[:game].determine_winner %>
+    <div class="large-4 medium-4 small-6 columns">
+      <%= session[:game].dealer_hand.print_hand %>
+    </div>
+  <% else %>
+    <div class="large-4 medium-4 small-6 columns">
+      <p>Dealer was dealt: [ ]</p>
+      Dealer was dealt: <%= session[:game].dealer_hand.cards.last.id %>
+    </div>
+  <% end %>
+  <div class="large-4 medium-4 small-6 columns">
+    <%= session[:game].player_hand.print_hand %>
+  </div>
+  <div class="large-4 medium-4 small-12 columns">
+    <%= erb :scoreboard %>
+  </div>
+</div>
 <% if session[:game].player_hand.bust? || session[:player_stands] == true %>
-  <form action="/" method="get">
-    <input type="submit" value="Play Again?">
-  </form>
+  <span>
+    <form action="/" method="get">
+      <input class="button alert" type="submit" value="Play Again?">
+    </form>
+  </span>
 <% else %>
-  Would you like to hit or stand?
-  <form class="" action="/blackjack" method="post">
-    <input type="submit" name="choice" value="Hit">
-    <input type="submit" name="choice" value="Stand">
-  </form>
+  <center>Would you like to hit or stand?</center>
+  <span>
+    <form class="" action="/blackjack" method="post">
+      <input class="button alert" type="submit" name="choice" value="Hit">
+      <input class="button alert" type="submit" name="choice" value="Stand">
+    </form>
+  </span>
 <% end %>

@@ -20,10 +20,9 @@ class Hand
       score += card.value
     end
     ace_cards.each do |card|
-      if score > 10 - ace_cards.count
-        score += 1
-      else
-        score += 11
+      score += 1
+      if score < 12
+        score += 10
       end
     end
     score
@@ -39,6 +38,14 @@ class Hand
 
   def bust?
     score > 21
+  end
+
+  def display_last_card_value
+    if cards.last.rank == 'A'
+      11
+    else
+      cards.last.value
+    end
   end
 
 end
