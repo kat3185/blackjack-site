@@ -1,4 +1,6 @@
 require_relative 'hand'
+require_relative 'card'
+require 'pry'
 
 class Game
   attr_reader :player_hand, :dealer_hand, :deck
@@ -25,9 +27,9 @@ class Game
   end
 
   def determine_winner
-    if player_hand.name.downcase == "yourname"
+    if player_hand.name.downcase == "your name"
       "<h2><center> YOU LOSE!</center></h2>
-      <h3><center>I told you you would lose if you entered yourname!</center></h3>"
+      <h3><center>I told you you would lose if you entered your name!</center></h3>"
     elsif player_hand.bust?
       "<h2><center> #{player_hand.name.upcase} BUSTS!  Dealer wins! </center></h2>"
     elsif dealer_hand.bust?

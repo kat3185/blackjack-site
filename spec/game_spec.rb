@@ -36,12 +36,6 @@ describe Game do
     end
   end
 
-  describe '#dealer' do
-    it 'returns the dealer\s name' do
-      expect(game.dealer).to eq("Dealer")
-    end
-  end
-
   describe '#dealer_turn' do
     it 'stands if the dealer\s score is over 17' do
       game.dealer_hand.hit!(face_card)
@@ -57,12 +51,6 @@ describe Game do
       game.dealer_hand.hit!(Card.new("A", "♥"))
       expect(game.dealer_hand.score).not_to eq(17)
     end
-
-  end
-
-  describe '#visible_dealer_cards' do
-    it 'does not display the first card the dealer was dealt'
-
   end
 
 end
