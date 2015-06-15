@@ -13,10 +13,6 @@ class Game
     player_hand.name
   end
 
-  def dealer
-    dealer_hand.name
-  end
-
   def deal
     2.times do @player_hand.hit!(deck.draw!) end
     2.times do @dealer_hand.hit!(deck.draw!) end
@@ -29,7 +25,10 @@ class Game
   end
 
   def determine_winner
-    if player_hand.bust?
+    if player_hand.name.downcase == "yourname"
+      "<h2><center> YOU LOSE!</center></h2>
+      <h3><center>I told you you would lose if you entered yourname!</center></h3>"
+    elsif player_hand.bust?
       "<h2><center> #{player_hand.name.upcase} BUSTS!  Dealer wins! </center></h2>"
     elsif dealer_hand.bust?
       "<h2><center> DEALER BUSTS!  You win!  Good job, #{player_hand.name}.</center></h2>"

@@ -6,12 +6,10 @@
   <tr>
     <td><%= session[:game].player_hand.score %></td>
     <td>
-      <% if session[:game].player_hand.bust? %>
+      <% if session[:game].player_hand.bust? || session[:player_stands] == true %>
       <%= session[:game].dealer_hand.score %>
-      <% elsif session[:player_stands] == false %>
-      <%= session[:game].dealer_hand.display_last_card_value %>
       <% else %>
-      <%= session[:game].dealer_hand.score %>
+      <%= session[:game].dealer_hand.display_last_card_value %>
       <% end %>
       </td>
   </tr>

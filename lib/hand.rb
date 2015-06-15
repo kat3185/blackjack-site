@@ -9,27 +9,30 @@ class Hand
   end
 
   def hit!(card)
-  @cards << card
+    @cards << card
   end
 
   def score
-    score = 0
+    hand_score = 0
     non_ace_cards = cards.map { |card| card if card.rank != 'A' }.compact
     ace_cards = cards.map { |card| card if card.rank == 'A' }.compact
+
     non_ace_cards.each do |card|
-      score += card.value
+      hand_score += card.value
     end
+
     ace_cards.each do |card|
-      score += 1
-      if score < 12
-        score += 10
+      hand_score += 1
+      if hand_score < (12 - (ace_cards.count - 1))
+        hand_score += 10
       end
     end
-    score
+
+    hand_score
   end
 
   def print_hand
-    strings = ""
+    strings = String.new
     cards.each do |card|
     strings += "<p>#{name} was dealt: #{card.id}</p>"
     end
