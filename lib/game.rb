@@ -1,6 +1,5 @@
 require_relative 'hand'
 require_relative 'card'
-require 'pry'
 
 class Game
   attr_reader :player_hand, :dealer_hand, :deck
@@ -28,19 +27,17 @@ class Game
 
   def determine_winner
     if player_hand.name.downcase == "your name"
-      "<h2><center> YOU LOSE!</center></h2>
-      <h3><center>I told you you would lose if you entered your name!</center></h3>"
+      "YOU LOSE! \n\n I told you you would lose if you entered your name!"
     elsif player_hand.bust?
-      "<h2><center> #{player_hand.name.upcase} BUSTS!  Dealer wins! </center></h2>"
+      "#{player_hand.name.upcase} BUSTS!  Dealer wins!"
     elsif dealer_hand.bust?
-      "<h2><center> DEALER BUSTS!  You win!  Good job, #{player_hand.name}.</center></h2>"
+      "DEALER BUSTS!  You win!  Good job, #{player_hand.name}."
     elsif player_hand.score > dealer_hand.score
-      "<h2><center> #{player_hand.name.upcase} WINS! Congrats! </center></h2>"
+      "#{player_hand.name.upcase} WINS! Congrats!"
     elsif player_hand.score < dealer_hand.score
-      "<h2><center> DEALER WINS!  Better luck next time, #{player_hand.name}! </center></h2>"
+      "DEALER WINS!  Better luck next time, #{player_hand.name}!"
     else
-      "<h2><center> Your scores are tied!  DEALER WINS! </center></h2>
-      <h3><center> Haha! </center></h3>"
+      "Your scores are tied!  DEALER WINS!  Haha!"
     end
   end
 end

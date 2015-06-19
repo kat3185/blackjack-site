@@ -1,6 +1,5 @@
 require 'sinatra'
 require 'sinatra/flash'
-
 require_relative 'lib/game'
 
 configure :development, :test do
@@ -17,6 +16,7 @@ get '/' do
   erb :index
 end
 
+#replace session with hash and make decorate class
 get '/blackjack' do
   if session[:game] == nil
     session[:game] = Game.new(session[:player_name])
@@ -25,22 +25,24 @@ get '/blackjack' do
   erb :play
 end
 
-post '/' do
+get '/playagain' do
+  session[:game] = nil
+  session[:player_stands] = false
+  redirect '/blackjack'
+end
+
+post '/users' do
   session[:player_name] = params[:name]
   redirect '/blackjack'
 end
 
-post '/blackjack' do
- if params[:choice] == "Hit"
-   session[:game].player_hand.hit!(session[:game].deck.draw!)
-   redirect '/blackjack'
- else
-   session[:player_stands] = true
-   session[:game].dealer_turn
-   redirect '/blackjack'
- end
+post '/hit' do
+  session[:game].player_hand.hit!(session[:game].deck.draw!)
+  redirect '/blackjack'
 end
 
-get '/scoreboard' do
-  erb :scoreboard
+post '/stand' do
+ session[:player_stands] = true
+ session[:game].dealer_turn
+ redirect '/blackjack'
 end

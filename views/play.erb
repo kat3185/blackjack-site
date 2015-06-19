@@ -1,7 +1,7 @@
-<span><h1><%=session[:player_name]%> vs Dealer</h1></span>
+<h2><%=session[:player_name]%> vs Dealer</h2>
 <div class="row">
   <% if session[:player_stands] == true  || session[:game].player_hand.bust? %>
-    <%= session[:game].determine_winner %>
+    <h3><%= session[:game].determine_winner %></h3>
     <div class="large-4 medium-4 small-6 columns">
       <%= session[:game].dealer_hand.print_hand %>
     </div>
@@ -18,18 +18,26 @@
     <%= erb :scoreboard %>
   </div>
 </div>
+
 <% if session[:game].player_hand.bust? || session[:player_stands] == true %>
-  <span>
-    <form action="/" method="get">
+  <div class="text-center">
+    <form action="/playagain" method="get">
       <input class="button alert" type="submit" value="Play Again?">
     </form>
-  </span>
-<% else %>
-  <center>Would you like to hit or stand?</center>
-  <span>
-    <form class="" action="/blackjack" method="post">
-      <input class="button alert" type="submit" name="choice" value="Hit">
-      <input class="button alert" type="submit" name="choice" value="Stand">
+    <form action="/" method="get">
+      <input class="button alert" type="submit" value="I give up!">
     </form>
-  </span>
+  </div>
+<% else %>
+  <div id="container">
+    Would you like to hit or stand?
+  </div>
+  <div class="text-center">
+    <form class="" action="/hit" method="post">
+      <input class="button alert" id="button1" type="submit" name="choice" value="Hit">
+    </form>
+    <form class="" action="/stand" method="post">
+      <input class="button alert" id="button2" type="submit" name="choice" value="Stand">
+    </form>
+  </div>
 <% end %>
